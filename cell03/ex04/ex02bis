@@ -1,1 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ex02bis</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    .box {
+      width: 100px;
+      height: 100px;
+      background: tomato;
+      margin: 5px;
+    }
+  </style>
+</head>
+<body>
+  <button id="add">Add Box</button>
+  <div id="container"></div>
 
+  <script>
+    $(function(){
+      $("#add").click(function(){
+        let $box = $("<div></div>").addClass("box");
+        $box.click(function(){ $(this).remove(); });
+        $("#container").append($box);
+      });
+    });
+  </script>
+</body>
+</html>

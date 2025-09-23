@@ -1,1 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ex03bis</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    #ft_list { margin-top: 20px; }
+    .todo {
+      background: #eee;
+      padding: 10px;
+      margin: 5px 0;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button {
+      padding: 8px 12px;
+      border: none;
+      background: #007bff;
+      color: white;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <button id="newBtn">New</button>
+  <div id="ft_list"></div>
 
+  <script>
+    $(document).ready(function () {
+      // โหลดจาก cookie
+      let saved = getCookie("todo");
+      if (saved) {
+        let list = JSON.parse(saved);
+        $.each(list, function (i, item) { add(item, false); });
+      }
+
+      // เพิ่ม todo
+      $("#newBtn").click(function () {
+        let text = prompt("New TO DO:");
+        if (text && text.trim() !== "") add(text.trim(), true);
+      });
+
+      function add(text, save = true) {
+        let $div = $("<div></div>").addClass("todo").text(text);
+        $div.click(function () {
+          if (confirm("Remove?")) {
+            $(this).remove();
+            update();
+          }
+        });
+        $("#ft_list").prepend($div);
+        if (save) update();
+      }
+
+      function update() {
+        let items = [];
+        $("#ft_list .todo").each(function () { items.push($(this).text()); });
+        setCookie("todo", JSON.stringify(items), 7);
+      }
+
+      function setCookie(name, value, days) {
+        let d = new Date();
+        d.setTime(d.getTime() + (days*24*60*60*1000));
+        document.cookie = name + "=" + value + ";expires=" + d.toUTCString() + ";path=/";
+      }
+
+      function getCookie(name) {
+        let cname = name + "=";
+        let ca = document.cookie.split(';');
+        for (let c of ca) {
+          c = c.trim();
+          if (c.indexOf(cname) === 0) return c.substring(cname.length);
+        }
+        return "";
+      }
+    });
+  </script>
+</body>
+</html>

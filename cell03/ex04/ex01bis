@@ -1,1 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ex01bis</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <button id="change">Change color</button>
 
+  <script>
+    $(function(){
+      $("#change").click(function(){
+        $("body").css("background-color", "lightblue");
+      });
+    });
+  </script>
+</body>
+</html>

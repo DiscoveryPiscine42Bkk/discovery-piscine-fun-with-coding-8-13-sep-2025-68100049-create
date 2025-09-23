@@ -1,1 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ex00bis</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <button id="btn">Click me</button>
 
+  <script>
+    $(document).ready(function(){
+      $("#btn").click(function(){
+        alert("Hello World (jQuery)!");
+      });
+    });
+  </script>
+</body>
+</html>
